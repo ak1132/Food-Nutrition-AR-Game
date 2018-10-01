@@ -1,2 +1,2 @@
 # Food-Volume-Estimation-Game
-A game in Unity AR for CS598
+An augmented reality game in Unity3D for CS598
