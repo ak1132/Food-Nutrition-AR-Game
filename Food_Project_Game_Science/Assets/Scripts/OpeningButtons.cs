@@ -10,11 +10,12 @@ public class OpeningButtons : MonoBehaviour {
 	}
 	
 	public void GoToFoodScan()  {
-		Application.LoadLevel ("FoodScanScene");
+		Application.LoadLevel ("CameraScene");
 	}
 	
 	public void ResetGame(){
 		PlayerPrefs.DeleteAll();
+		Application.LoadLevel ("OpeningScene");
 	}
 	
 	// Update is called once per frame
