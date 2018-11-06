@@ -18,13 +18,16 @@ public class NutritionixClient : MonoBehaviour {
         requestHeaders["x-app-id"]= myApiId;
         requestHeaders["x-app-key"] = myApiKey;
         requestHeaders["x-remote-user-id"] = "0";
+        requestHeaders["Content-Type"] = "application/json";
 
         Nutritionix.NutritionixInfo nutritionData = new Nutritionix.NutritionixInfo
         {
             Query = food,
             Timezone = timezone
         };
-        byte[] formData = form.data;
+
+        string JSONString = Nutritionix.Serialize.ToJson(nutritionData);
+        byte[] formData = System.Text.Encoding.UTF8.GetBytes(JSONString);
 
         WWW request = new WWW(URL, formData, requestHeaders);
         StartCoroutine(OnResponse(request));
