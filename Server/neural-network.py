@@ -67,7 +67,7 @@ test_idx = np.array(test_idx)
 net_data = load(open("bvlc_alexnet.npy", "rb"), encoding="latin1").item()
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/nn", methods=["GET", "POST"])
 def conv(input, kernel, biases, k_h, k_w, c_o, s_h, s_w,  padding="VALID", group=1):
     '''From https://github.com/ethereon/caffe-tensorflow
     '''
