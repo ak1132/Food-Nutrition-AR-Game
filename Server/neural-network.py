@@ -10,9 +10,11 @@ from numpy import random
 import tensorflow as tf
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, recall_score
-import importlib
-caffe_classes = input('caffe_classes')
-importlib.import_module(caffe_classes)
+#import importlib
+#caffe_classes = input('caffe_classes')
+#importlib.import_module(caffe_classes)
+import add_attritutes
+import caffe_classes
 from caffe_classes import class_names
 from flask import Flask, jsonify
 
