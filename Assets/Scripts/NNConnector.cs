@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class NNConnector : MonoBehaviour
 {
 
-    private readonly string screenshotURL = "";
+    private readonly string screenshotURL = "http://127.0.0.1:5000/nn/";
 
     public void SendDatatoModel()
     {
@@ -33,7 +33,7 @@ public class NNConnector : MonoBehaviour
 
         WWWForm form = new WWWForm();
         form.AddField("frameCount", Time.frameCount.ToString());
-        form.AddBinaryData("fileUpload", bytes, "screenshot.png", "image/png");
+        form.AddBinaryData("image", bytes, "screenshot.png", "image/png");
 
         using(var w = UnityWebRequest.Post(screenshotURL, form))
         {

@@ -10,7 +10,7 @@ namespace Nutritionix
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    public partial class NutritionixInfo
+    public partial class NutritionixRequest
     {
         [JsonProperty("query")]
         public string Query { get; set; }
@@ -52,14 +52,14 @@ namespace Nutritionix
         public string Locale { get; set; }
     }
 
-    public partial class NutritionixInfo
+    public partial class NutritionixRequest
     {
-        public static NutritionixInfo FromJson(string json) => JsonConvert.DeserializeObject<NutritionixInfo>(json, Nutritionix.Converter.Settings);
+        public static NutritionixRequest FromJson(string json) => JsonConvert.DeserializeObject<NutritionixRequest>(json, Nutritionix.Converter.Settings);
     }
 
     public static partial class Serialize
     {
-        public static string ToJson(this NutritionixInfo self) => JsonConvert.SerializeObject(self, Nutritionix.Converter.Settings);
+        public static string ToJson(this NutritionixRequest self) => JsonConvert.SerializeObject(self, Nutritionix.Converter.Settings);
     }
 
     internal static class Converter

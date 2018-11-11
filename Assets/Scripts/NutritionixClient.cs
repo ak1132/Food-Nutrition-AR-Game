@@ -26,7 +26,7 @@ public class NutritionixClient : MonoBehaviour {
         requestHeaders["x-remote-user-id"] = "0";
         requestHeaders["Content-Type"] = contentType;
 
-        NutritionixInfo nutritionData = new NutritionixInfo
+        NutritionixRequest nutritionData = new NutritionixRequest
         {
             Query = food,
             Timezone = timezone,
@@ -52,8 +52,9 @@ public class NutritionixClient : MonoBehaviour {
     {
         yield return request;
         NutritionixResponse response = NutritionixResponse.FromJson(request.ToString());
-        Debug.Log(request.text);
+        //Debug.Log(request.text);
         GetAttributeNamesForIds(response);
+        Debug.Log(response.ToJson());
     }
 
     private IEnumerator GetAttributeNamesForIds(NutritionixResponse response)
