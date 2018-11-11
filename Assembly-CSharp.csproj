@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\NNConnector.cs" />
     <Compile Include="Assets\Scripts\NutritionInfo.cs" />
     <Compile Include="Assets\Scripts\NutritionixClient.cs" />
+    <Compile Include="Assets\Scripts\NutritionixResponse.cs" />
     <Compile Include="Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs" />
     <Compile Include="Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs" />
     <None Include="Assets\Vuforia\Shaders\ColoredLines.shader" />

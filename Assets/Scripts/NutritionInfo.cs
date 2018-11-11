@@ -57,7 +57,7 @@ namespace Nutritionix
         public static NutritionixInfo FromJson(string json) => JsonConvert.DeserializeObject<NutritionixInfo>(json, Nutritionix.Converter.Settings);
     }
 
-    public static class Serialize
+    public static partial class Serialize
     {
         public static string ToJson(this NutritionixInfo self) => JsonConvert.SerializeObject(self, Nutritionix.Converter.Settings);
     }

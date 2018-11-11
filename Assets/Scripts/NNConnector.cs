@@ -5,8 +5,8 @@ using UnityEngine.Networking;
 
 public class NNConnector : MonoBehaviour
 {
-    public bool takingScreenshot = false;
-    private string screenshotURL = "";
+
+    private readonly string screenshotURL = "";
 
     public void SendDatatoModel()
     {
@@ -47,5 +47,6 @@ public class NNConnector : MonoBehaviour
                 Debug.Log("Successfully uploaded screenshot");
             }
         }
+
     }
 }
