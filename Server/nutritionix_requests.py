@@ -14,9 +14,11 @@ json_data = json.loads(data)
 # way to change query
 json_data["query"] = "apple"
 
-print(json_data)
+print("Request:\n\n"+json.dumps(json_data, indent=2, sort_keys=True))
 
 response = requests.post(url, data=data, headers=headers)
 
 # could write this to a file
-print(response.text)
+parsed = json.loads(response.text)
+response_json = json.dumps(parsed, indent=2, sort_keys=True)
+print("\n\nResponse:\n\n"+response_json)
