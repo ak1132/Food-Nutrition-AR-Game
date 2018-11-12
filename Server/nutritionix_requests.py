@@ -20,5 +20,12 @@ response = requests.post(url, data=data, headers=headers)
 
 # could write this to a file
 parsed = json.loads(response.text)
+# print(parsed["foods"][0]["full_nutrients"])
+
+#attr = parsed["foods"][0]["full_nutrients"]
+# print(attr)
+# for i in range(0, len(attr)):
+#    print(attr[i]+"\n")
+
 response_json = json.dumps(parsed, indent=2, sort_keys=True)
-print("\n\nResponse:\n\n"+response_json)
+# print("\n\nResponse:\n\n"+response_json)
