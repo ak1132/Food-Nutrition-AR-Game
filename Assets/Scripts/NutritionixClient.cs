@@ -67,11 +67,19 @@ public class NutritionixClient : MonoBehaviour {
             IList<FullNutrient> FullNutrients = food.FullNutrients;
             foreach(FullNutrient nutrient in FullNutrients)
             {
-                Attr_URL += nutrient.AttrId;
-                WWW request = new WWW(Attr_URL);
-                yield return request;
-                string[] resp = request.text.Split(',');
-                nutrient.AttrName = resp[1];
+                WWWForm form = new WWWForm();
+                form.AddField("id", nutrient.AttrId);
+                UnityWebRequest w = UnityWebRequest.Post(Attr_URL, form);
+                yield return w.SendWebRequest();
+                if (w.isNetworkError || w.isHttpError)
+                {
+                    Debug.Log(w.error);
+                }
+                else
+                {
+                    string[] resp = w.downloadHandler.text.Split(',');
+                    nutrient.AttrName = resp[1];
+                }
             }
         }
     }

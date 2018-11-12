@@ -13,6 +13,7 @@ namespace Nutritionix
         [JsonProperty("attr_id")]
         public int AttrId { get; set; }
 
+        [JsonProperty("attr_name")]
         public string AttrName { get; set; }
 
         [JsonProperty("value")]
