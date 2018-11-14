@@ -1,2 +1,2 @@
 # Food-Volume-Estimation-Game
-A game in Unity AR for CS598
+An augmented reality application using Vuforia Engine and Unity Game Engine built in C#
