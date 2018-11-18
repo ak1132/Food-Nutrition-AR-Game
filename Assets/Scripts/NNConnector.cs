@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
-using Nutritionix;
 using System.Collections.Generic;
 using System;
 

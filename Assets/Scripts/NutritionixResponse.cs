@@ -3,9 +3,7 @@ using System.Collections.Generic;
 
 namespace Nutritionix
 {
-    using System.Globalization;
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
 
     public class FullNutrient
     {
