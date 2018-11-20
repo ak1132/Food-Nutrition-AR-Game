@@ -42,8 +42,6 @@ def food_recognition():
         content = request.files['file'].read()
         raise Exception(
             "Invalid :: Request does not have a image file"+str(request.files))
-        raise Exception(
-            "Invalid :: Request does not have a image file"+str(request.files))
 
     # google cloud object detection part
     client = vision.ImageAnnotatorClient()
