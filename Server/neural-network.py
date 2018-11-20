@@ -29,6 +29,8 @@ def map_attribute_values():
     df = pd.read_excel('nutritionix.xlsx')
     return df.loc[df['attr_id'] == int(_id)].name.to_csv()
 
+
+
 @app.route("/nn", methods=["GET", "POST"])
 def food_recognition():
     # content is a byte array image
@@ -38,8 +40,10 @@ def food_recognition():
     # bvlc_alexnet.npy (network weights), caffe_classes.py, namedict.json (food classes), svm.pkl (trained classifier)
     if 'file' in request.files:
         content = request.files['file'].read()
-    else:
-        raise Exception("Invalid :: Request does not have a image file"+str(request.files))
+        raise Exception(
+            "Invalid :: Request does not have a image file"+str(request.files))
+        raise Exception(
+            "Invalid :: Request does not have a image file"+str(request.files))
 
     # google cloud object detection part
     client = vision.ImageAnnotatorClient()
@@ -92,9 +96,7 @@ def food_recognition():
     train_x = np.zeros((1, 227, 227, 3)).astype(np.float32)
     train_y = np.zeros((1, 1000))
     xdim = train_x.shape[1:]
-    ydim = train_y.shape[1]
 
-    
     x = tf.placeholder(tf.float32, (None,) + xdim)
     # conv1
     #conv(11, 11, 96, 4, 4, padding='VALID', name='conv1')
@@ -244,29 +246,30 @@ def food_recognition():
         names.append(idx2name[str(int(idx[i]))])
     return json.dumps(names)
 
-def conv(input, kernel, biases, k_h, k_w, c_o, s_h, s_w,  padding="VALID", group=1):
-        c_i = input.get_shape()[-1]
-        assert c_i % group == 0
-        assert c_o % group == 0
 
-        def convolve(i, k): return tf.nn.conv2d(
-            i, k, [1, s_h, s_w, 1], padding=padding)
-        if group == 1:
-            conv = convolve(input, kernel)
-        else:
-            # tf.split(3, group, input)
-            input_groups = tf.split(input, group, 3)
-            # tf.split(3, group, kernel)
-            kernel_groups = tf.split(kernel, group, 3)
-            output_groups = [convolve(i, k)
-                             for i, k in zip(input_groups, kernel_groups)]
-            conv = tf.concat(output_groups, 3)  # tf.concat(3, output_groups)
-        return tf.reshape(tf.nn.bias_add(conv, biases), [-1] + conv.get_shape().as_list()[1:])
+    c_i = input.get_shape()[-1]
+    assert c_i % group == 0
+    assert c_o % group == 0
+
+    def convolve(i, k): return tf.nn.conv2d(
+        i, k, [1, s_h, s_w, 1], padding=padding)
+    if group == 1:
+        conv = convolve(input, kernel)
+    else:
+        # tf.split(3, group, input)
+        input_groups = tf.split(input, group, 3)
+        # tf.split(3, group, kernel)
+        kernel_groups = tf.split(kernel, group, 3)
+        output_groups = [convolve(i, k)
+                         for i, k in zip(input_groups, kernel_groups)]
+        conv = tf.concat(output_groups, 3)  # tf.concat(3, output_groups)
+    return tf.reshape(tf.nn.bias_add(conv, biases), [-1] + conv.get_shape().as_list()[1:])
+
+        conv = tf.concat(output_groups, 3)  # tf.concat(3, output_groups)
+    return tf.reshape(tf.nn.bias_add(conv, biases), [-1] + conv.get_shape().as_list()[1:])
+
 
 if __name__ == '__main__':
-    handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=1)
-    handler.setLevel(logging.INFO)
-    app.logger.addHandler(handler)
     app.run(debug=True)
     #path = '20151127_132650.jpg'
     # with open(path, 'rb') as image_file:
