@@ -52,7 +52,6 @@ public class NutritionixClient : MonoBehaviour {
     {
         yield return request;
         NutritionixResponse response = NutritionixResponse.FromJson(request.ToString());
-        //Debug.Log(request.text);
         GetAttributeNamesForIds(response);
         Debug.Log(response.ToJson());
     }

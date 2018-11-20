@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class NNConnector : MonoBehaviour
 {
 
-    private readonly string screenshotURL = "http://127.0.0.1:5000/nn/";
+    private readonly string screenshotURL = "http://localhost:5000/nn";
 
     public void SendDatatoModel()
     {
@@ -17,7 +17,6 @@ public class NNConnector : MonoBehaviour
     {
         string timeStamp = System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss");
         string pathToSave = Application.productName +"_"+ timeStamp + ".png";
-        //NativeToolkit.SaveScreenshot(pathToSave,Application.productName,".png");
         yield return new WaitForEndOfFrame();
 
         int width = Screen.width;
@@ -33,7 +32,7 @@ public class NNConnector : MonoBehaviour
 
         WWWForm form = new WWWForm();
         form.AddField("frameCount", Time.frameCount.ToString());
-        form.AddBinaryData("image", bytes, "screenshot.png", "image/png");
+        form.AddBinaryData("file", bytes, "screenshot.png", "image/png");
 
         using(var w = UnityWebRequest.Post(screenshotURL, form))
         {
@@ -44,6 +43,7 @@ public class NNConnector : MonoBehaviour
             }
             else
             {
+                Debug.Log(w.downloadHandler.text);
                 Debug.Log("Successfully uploaded screenshot");
             }
         }
