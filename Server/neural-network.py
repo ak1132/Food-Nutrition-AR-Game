@@ -1,8 +1,26 @@
 from flask import Flask, jsonify, request
 import pandas as pd
 from pandas import ExcelFile
+import logging
+from logging.handlers import RotatingFileHandler
+import numpy as np
+import tensorflow as tf
+from caffe_classes import class_names
+from sklearn.svm import SVC
+import pickle
+import json
+from google.cloud import vision
+import cv2
+import sys
+import json
+from scipy.misc import imresize, imsave
 
 app = Flask(__name__)
+
+
+@app.route("/")
+def hello():
+    return "Hello world"
 
 
 @app.route("/get_attr_name", methods=["GET", "POST"])
@@ -13,21 +31,17 @@ def map_attribute_values():
 
 
 @app.route("/nn", methods=["GET", "POST"])
-def food_recognition(content):
+def food_recognition():
     # content is a byte array image
     # dependencies:
     # package: numpy, tensorflow, sklearn, opencv-python, google-cloud-vision
     # files: GoogleCloud.json (to call the API, export GOOGLE_APPLICATION_CREDENTIALS="[path]/GoogleCloud.json" before running)
     # bvlc_alexnet.npy (network weights), caffe_classes.py, namedict.json (food classes), svm.pkl (trained classifier)
-    import numpy as np
-    import tensorflow as tf
-    from caffe_classes import class_names
-    from sklearn.svm import SVC
-    import pickle
-    import json
-    from google.cloud import vision
-    import cv2
-    from scipy.misc import imresize, imsave
+    if 'file' in request.files:
+        content = request.files['file'].read()
+    else:
+        raise Exception(
+            "Invalid :: Request does not have a image file"+str(request.files))
 
     # google cloud object detection part
     client = vision.ImageAnnotatorClient()
@@ -246,7 +260,7 @@ def food_recognition(content):
     names = list()
     for i in range(len(idx)):
         names.append(idx2name[str(int(idx[i]))])
-    return names
+    return json.dumps(names)
 
 
 if __name__ == '__main__':
