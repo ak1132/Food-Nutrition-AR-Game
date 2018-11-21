@@ -1,26 +1,8 @@
 from flask import Flask, jsonify, request
 import pandas as pd
 from pandas import ExcelFile
-import logging
-from logging.handlers import RotatingFileHandler
-import numpy as np
-import tensorflow as tf
-from caffe_classes import class_names
-from sklearn.svm import SVC
-import pickle
-import json
-from google.cloud import vision
-import cv2
-import sys
-import json
-from scipy.misc import imresize, imsave
 
 app = Flask(__name__)
-
-
-@app.route("/")
-def hello():
-    return "Hello world"
 
 
 @app.route("/get_attr_name", methods=["GET", "POST"])
@@ -30,18 +12,22 @@ def map_attribute_values():
     return df.loc[df['attr_id'] == int(_id)].name.to_csv()
 
 
-
 @app.route("/nn", methods=["GET", "POST"])
-def food_recognition():
+def food_recognition(content):
     # content is a byte array image
     # dependencies:
     # package: numpy, tensorflow, sklearn, opencv-python, google-cloud-vision
     # files: GoogleCloud.json (to call the API, export GOOGLE_APPLICATION_CREDENTIALS="[path]/GoogleCloud.json" before running)
     # bvlc_alexnet.npy (network weights), caffe_classes.py, namedict.json (food classes), svm.pkl (trained classifier)
-    if 'file' in request.files:
-        content = request.files['file'].read()
-        raise Exception(
-            "Invalid :: Request does not have a image file"+str(request.files))
+    import numpy as np
+    import tensorflow as tf
+    from caffe_classes import class_names
+    from sklearn.svm import SVC
+    import pickle
+    import json
+    from google.cloud import vision
+    import cv2
+    from scipy.misc import imresize, imsave
 
     # google cloud object detection part
     client = vision.ImageAnnotatorClient()
@@ -61,7 +47,6 @@ def food_recognition():
     # tensorflow part
     decoded = cv2.imdecode(np.frombuffer(content, np.uint8), -1)
     s = np.shape(decoded)
-    #print("Hello\n"+decoded, file=sys.stderr)
     # BGR to RGB
     d1 = (np.zeros(s)).astype(np.uint8)
     d1[:, :, 0] = decoded[:, :, 2]
@@ -76,16 +61,16 @@ def food_recognition():
     # decoded=decoded.astype(float32)
     patches = list()
     for key in d_bbox:
-        x1 = round(s[1] * key[0])
-        y1 = round(s[0] * key[1])
-        x2 = round(s[1] * key[2])
-        y2 = round(s[0] * key[3])
+        x1 = round(s[1]*key[0])
+        y1 = round(s[0]*key[1])
+        x2 = round(s[1]*key[2])
+        y2 = round(s[0]*key[3])
         p = d1[y1:y2, x1:x2, :3]
         #p[:, :, 0], p[:, :, 2] = p[:, :, 2], p[:, :, 0]
-        imsave(str(x1) + '-' + str(y1) + '.png', p)
+        imsave(str(x1)+'-'+str(y1)+'.png', p)
         p = imresize(arr=p, size=(227, 227), interp='bilinear')
         p = p[:, :, :3].astype(np.float32)
-        p = p - np.mean(p)
+        p = p-np.mean(p)
         p[:, :, 0], p[:, :, 2] = p[:, :, 2], p[:, :, 0]
         patches.append(p)
 
@@ -94,7 +79,26 @@ def food_recognition():
     train_x = np.zeros((1, 227, 227, 3)).astype(np.float32)
     train_y = np.zeros((1, 1000))
     xdim = train_x.shape[1:]
+    ydim = train_y.shape[1]
 
+    def conv(input, kernel, biases, k_h, k_w, c_o, s_h, s_w,  padding="VALID", group=1):
+        c_i = input.get_shape()[-1]
+        assert c_i % group == 0
+        assert c_o % group == 0
+
+        def convolve(i, k): return tf.nn.conv2d(
+            i, k, [1, s_h, s_w, 1], padding=padding)
+        if group == 1:
+            conv = convolve(input, kernel)
+        else:
+            # tf.split(3, group, input)
+            input_groups = tf.split(input, group, 3)
+            # tf.split(3, group, kernel)
+            kernel_groups = tf.split(kernel, group, 3)
+            output_groups = [convolve(i, k)
+                             for i, k in zip(input_groups, kernel_groups)]
+            conv = tf.concat(output_groups, 3)  # tf.concat(3, output_groups)
+        return tf.reshape(tf.nn.bias_add(conv, biases), [-1]+conv.get_shape().as_list()[1:])
     x = tf.placeholder(tf.float32, (None,) + xdim)
     # conv1
     #conv(11, 11, 96, 4, 4, padding='VALID', name='conv1')
@@ -242,29 +246,7 @@ def food_recognition():
     names = list()
     for i in range(len(idx)):
         names.append(idx2name[str(int(idx[i]))])
-    return json.dumps(names)
-
-
-    c_i = input.get_shape()[-1]
-    assert c_i % group == 0
-    assert c_o % group == 0
-
-    def convolve(i, k): return tf.nn.conv2d(
-        i, k, [1, s_h, s_w, 1], padding=padding)
-    if group == 1:
-        conv = convolve(input, kernel)
-    else:
-        # tf.split(3, group, input)
-        input_groups = tf.split(input, group, 3)
-        # tf.split(3, group, kernel)
-        kernel_groups = tf.split(kernel, group, 3)
-        output_groups = [convolve(i, k)
-                         for i, k in zip(input_groups, kernel_groups)]
-        conv = tf.concat(output_groups, 3)  # tf.concat(3, output_groups)
-    return tf.reshape(tf.nn.bias_add(conv, biases), [-1] + conv.get_shape().as_list()[1:])
-
-        conv = tf.concat(output_groups, 3)  # tf.concat(3, output_groups)
-    return tf.reshape(tf.nn.bias_add(conv, biases), [-1] + conv.get_shape().as_list()[1:])
+    return names
 
 
 if __name__ == '__main__':
