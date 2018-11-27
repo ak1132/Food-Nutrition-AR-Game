@@ -53,10 +53,10 @@ namespace Nutritionix
         public string ServingUnit { get; set; }
 
         [JsonProperty("serving_weight_grams")]
-        public int ServingWeightGrams { get; set; }
+        public double ServingWeightGrams { get; set; }
 
         [JsonProperty("nf_calories")]
-        public int NfCalories { get; set; }
+        public double NfCalories { get; set; }
 
         [JsonProperty("nf_total_fat")]
         public double NfTotalFat { get; set; }
@@ -65,7 +65,7 @@ namespace Nutritionix
         public double NfSaturatedFat { get; set; }
 
         [JsonProperty("nf_cholesterol")]
-        public int NfCholesterol { get; set; }
+        public double NfCholesterol { get; set; }
 
         [JsonProperty("nf_sodium")]
         public double NfSodium { get; set; }

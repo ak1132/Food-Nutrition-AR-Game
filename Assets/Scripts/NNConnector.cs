@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using Nutritionix;
+using System.Collections.Generic;
+using System;
 
 public class NNConnector : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class NNConnector : MonoBehaviour
 
     public void SendDatatoModel()
     {
-        StartCoroutine("Send");
+        StartCoroutine(Send());
     }
 
     IEnumerator Send()
@@ -43,10 +45,32 @@ public class NNConnector : MonoBehaviour
             }
             else
             {
-                Debug.Log(w.downloadHandler.text);
-                Debug.Log("Successfully uploaded screenshot");
+                string response = w.downloadHandler.text.Trim();
+                Debug.Log("Response:\n"+response);
+                NNResponse nNResponse = NNResponse.FromJson(response);
+                IList<string> foods = nNResponse.Names;
+                IList<double> areas = nNResponse.Areas;
+
+                List<double> Weights = new List<double>();
+                string Query = "";
+
+                for(int i = 0; i < foods.Count; i++)
+                {
+                    Weights.Add(areas[i]);
+                    Query += foods[i] + " ";
+                }
+
+                if (Weights.Count != 0)
+                    GetComponent<NutritionixClient>().GetNutrientsFromFood(Query, Weights);
+                else
+                    Exception("Empty Response from the neural network");
             }
         }
 
+    }
+
+    private Exception Exception(string v)
+    {
+        throw new Exception(v);
     }
 }

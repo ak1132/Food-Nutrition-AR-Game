@@ -1,9 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Nutritionix;
 using UnityEngine;
 using UnityEngine.Networking;
-using Nutritionix;
-using Newtonsoft.Json.Linq;
 
 public class NutritionixClient : MonoBehaviour {
 
@@ -15,72 +15,74 @@ public class NutritionixClient : MonoBehaviour {
     private readonly string contentType = "application/json";
 
     public string dummyFood = "apple";
+    public Dictionary<int, string> nutrientNames = new Dictionary<int, string> ();
 
-    public void GetNutrientsFromFood(string food)
-    {
-        WWWForm form = new WWWForm();
+    /*
+     * We will use a Tuple<string,double> and make rest calls to our neural network
+     * We have to calculate the weighted sum and average of nutrient values
+     * This weighted sum will decide the character's changes
+     *  calories, TotalFat, Dietary Fiber, Sugars, Protein
+     */
+
+    private double Calories = 0d;
+    private double TotalFat = 0d;
+    private double DietaryFiber = 0d;
+    private double Sugars = 0d;
+    private double Protein = 0d;
+    private double TotalWeight = 0d;
+
+    public void GetNutrientsFromFood (string Query, List<double> Weights) {
+        WWWForm form = new WWWForm ();
         Dictionary<string, string> requestHeaders = form.headers;
 
-        requestHeaders["x-app-id"]= myApiId;
+        requestHeaders["x-app-id"] = myApiId;
         requestHeaders["x-app-key"] = myApiKey;
         requestHeaders["x-remote-user-id"] = "0";
         requestHeaders["Content-Type"] = contentType;
 
+        // Assumption : There is only one quantity of each item
+
         NutritionixRequest nutritionData = new NutritionixRequest
         {
-            Query = food,
+            Query = Query,
             Timezone = timezone,
             Locale = locale,
             Aggregate = "string",
             NumServings = 1
         };
 
-        if (nutritionData.Query == null)
-        {
-            nutritionData.Query = dummyFood;
-        }
-
         string JSONString = Serialize.ToJson(nutritionData);
-        Debug.Log(JSONString);
         byte[] formData = System.Text.Encoding.UTF8.GetBytes(JSONString);
-
         WWW request = new WWW(URL, formData, requestHeaders);
-        StartCoroutine(OnResponse(request));    
+        StartCoroutine(OnResponse(request, Weights));
     }
 
-    private IEnumerator OnResponse(WWW request)
-    {
+    private IEnumerator OnResponse (WWW request, List<double> Weights) {
         yield return request;
-        NutritionixResponse response = NutritionixResponse.FromJson(request.ToString());
-        GetAttributeNamesForIds(response);
-        Debug.Log(response.ToJson());
-    }
+        NutritionixResponse response = NutritionixResponse.FromJson (request.text);
+        Debug.Log(request.text);
 
-    private IEnumerator GetAttributeNamesForIds(NutritionixResponse response)
-    {
-        string Attr_URL = "http://127.0.0.1:5000/get_attr_name/";
         IList<Food> foods = response.Foods;
 
-        foreach(Food food in foods)
-        {
-            IList<FullNutrient> FullNutrients = food.FullNutrients;
-            foreach(FullNutrient nutrient in FullNutrients)
-            {
-                WWWForm form = new WWWForm();
-                form.AddField("id", nutrient.AttrId);
-                UnityWebRequest w = UnityWebRequest.Post(Attr_URL, form);
-                yield return w.SendWebRequest();
-                if (w.isNetworkError || w.isHttpError)
-                {
-                    Debug.Log(w.error);
-                }
-                else
-                {
-                    string[] resp = w.downloadHandler.text.Split(',');
-                    nutrient.AttrName = resp[1];
-                }
-            }
+        for(int i=0; i<foods.Count; i++){
+            Food food = foods[i];
+            double Weight = Weights[i];
+
+            Calories += food.NfCalories*Weight;
+            TotalFat += food.NfTotalFat * Weight;
+            Protein += food.NfProtein * Weight;
+            DietaryFiber += food.NfDietaryFiber * Weight;
+            Sugars += food.NfProtein * Weight;
+
+            TotalWeight += Weight;
         }
+
+        PlayerPrefs.SetFloat("Calories", (float)(Calories / TotalWeight));
+        PlayerPrefs.SetFloat("TotalFat", (float)(TotalFat / TotalWeight));
+        PlayerPrefs.SetFloat("Protein", (float)(Protein / TotalWeight));
+        PlayerPrefs.SetFloat("DietaryFiber", (float)(DietaryFiber / TotalWeight));
+        PlayerPrefs.SetFloat("Sugars", (float)(Sugars / TotalWeight));
+
     }
 
 }

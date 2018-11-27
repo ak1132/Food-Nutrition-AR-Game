@@ -2,36 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using Vuforia;
 
 public class AnimationController : MonoBehaviour {
 
     public Animator animator;
     private Rigidbody rb;
     private Animation anime;
+    private ImageTarget imageTarget;
 
     // Use this for initialization
     void Start () {
-        //animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         anime = GetComponent<Animation>();
-    }
-
-    public AnimationClip GetAnimationClip(string name)
-    {
-        if (!animator) return null; // no animator
-
-        foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
-        {
-            if (clip.name == name)
-            {
-                return clip;
-            }
-        }
-        return null; // no clip by that name
+        imageTarget = GetComponent<ImageTarget>();
     }
 
     // Update is called once per frame
     void Update () {
+
+        float Calories = PlayerPrefs.GetFloat("Calories");
+        float TotalFat = PlayerPrefs.GetFloat("TotalFat");
+        float Protein = PlayerPrefs.GetFloat("Protein");
+        float DietaryFiber = PlayerPrefs.GetFloat("DietaryFiber");
+        float Sugars = PlayerPrefs.GetFloat("Sugars");
+
         float x = CrossPlatformInputManager.GetAxis("Horizontal");
         float y = CrossPlatformInputManager.GetAxis("Vertical");
 
