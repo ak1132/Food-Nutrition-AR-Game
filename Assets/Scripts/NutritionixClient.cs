@@ -7,8 +7,8 @@ using UnityEngine.Networking;
 
 public class NutritionixClient : MonoBehaviour {
 
-    private readonly string myApiId = "20cc37ae";
-    private readonly string myApiKey = "b38f89ed44a520302234f5b83853b4c9";
+    private readonly string myApiId = "xxxx";
+    private readonly string myApiKey = "xxxx";
     private readonly string URL = "https://trackapi.nutritionix.com/v2/natural/nutrients";
     private readonly string timezone = "US/Eastern";
     private readonly string locale = "en_US";
