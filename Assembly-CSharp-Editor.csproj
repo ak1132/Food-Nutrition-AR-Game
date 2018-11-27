@@ -60,7 +60,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\NativeToolkit\Editor\PostProcessor.cs" />
     <Compile Include="Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs" />
     <None Include="Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml" />
     <Reference Include="UnityEditor.StandardEvents">

@@ -60,14 +60,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\NativeToolkit\Example\NativeToolkitExample.cs" />
-    <Compile Include="Assets\NativeToolkit\Scripts\MiniJSON.cs" />
-    <Compile Include="Assets\NativeToolkit\Scripts\NativeToolkit.cs" />
     <Compile Include="Assets\Scripts\AnimationController.cs" />
+    <Compile Include="Assets\Scripts\CoroutineWithData.cs" />
+    <Compile Include="Assets\Scripts\LoadScript.cs" />
     <Compile Include="Assets\Scripts\NNConnector.cs" />
+    <Compile Include="Assets\Scripts\NNResponse.cs" />
     <Compile Include="Assets\Scripts\NutritionInfo.cs" />
     <Compile Include="Assets\Scripts\NutritionixClient.cs" />
     <Compile Include="Assets\Scripts\NutritionixResponse.cs" />
+    <Compile Include="Assets\Scripts\UserDefinedTargetScript.cs" />
     <Compile Include="Assets\Vuforia\Scripts\DefaultInitializationErrorHandler.cs" />
     <Compile Include="Assets\Vuforia\Scripts\DefaultTrackableEventHandler.cs" />
     <None Include="Assets\Vuforia\Shaders\ColoredLines.shader" />
