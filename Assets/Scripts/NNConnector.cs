@@ -7,7 +7,7 @@ using System;
 public class NNConnector : MonoBehaviour
 {
 
-    private readonly string screenshotURL = "http://localhost:5000/nn";
+    private readonly string screenshotURL = "http://d9553a25.ngrok.io/nn";
 
     public void SendDatatoModel()
     {

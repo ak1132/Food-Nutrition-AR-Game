@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
+//using UnityStandardAssets.CrossPlatformInput;
 using Vuforia;
 
 public class AnimationController : MonoBehaviour {
@@ -27,8 +27,8 @@ public class AnimationController : MonoBehaviour {
         float DietaryFiber = PlayerPrefs.GetFloat("DietaryFiber");
         float Sugars = PlayerPrefs.GetFloat("Sugars");
 
-        float x = CrossPlatformInputManager.GetAxis("Horizontal");
-        float y = CrossPlatformInputManager.GetAxis("Vertical");
+        float x = 0 /*CrossPlatformInputManager.GetAxis("Horizontal")*/;
+        float y =0 /*CrossPlatformInputManager.GetAxis("Vertical")*/;
 
         Vector3 movement = new Vector3(x, 0, y);
         rb.velocity = movement * 4f;
