@@ -1,4 +1,4 @@
-# Food-Volume-Estimation-Game
+# Food Augmented Reality Game
 
 An augmented reality nutrition application using Vuforia Engine and Unity Game Engine built in C#
 
