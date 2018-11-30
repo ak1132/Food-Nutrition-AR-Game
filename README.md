@@ -6,7 +6,7 @@ Backend also written using Tensorflow in Python and interfaced via Flask micro-f
 
 [![Game Demo Video](https://img.youtube.com/vi/koh-YtudNyA/hqdefault.jpg)](https://www.youtube.com/watch?v=koh-YtudNyA "Object Recognition and Character Animation/Scaling using Unity and Vuforia Engine")
 
-##Components include
+#Components include
 
 1. REST based interface in Python3 using Flask micro-framework.
 2. Google Cloud Vision used for getting bounding boxes
