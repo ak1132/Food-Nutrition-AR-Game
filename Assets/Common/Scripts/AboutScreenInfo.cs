@@ -113,13 +113,14 @@ public class AboutScreenInfo
 
         // Init our Description Strings
 
-        descriptions = new Dictionary<string, string>();
+        descriptions = new Dictionary<string, string>
+        {
 
-        // Image Targets
+            // Image Targets
 
-        descriptions.Add(
-            "ImageTargets",
-            description +
+            {
+                "ImageTargets",
+                description +
             "\nThe Image Targets sample shows how to detect an image " +
             "target and render a simple 3D object on top of it." +
             "\n\n" +
@@ -137,14 +138,15 @@ public class AboutScreenInfo
             "\n• Single tap to focus" +
             "\n• Double tap to access options menu" +
             "\n\n" +
-            footer + "\n");
+            footer + "\n"
+            },
 
 
-        // VuMark
+            // VuMark
 
-        descriptions.Add(
-            "VuMark",
-            description +
+            {
+                "VuMark",
+                description +
             "\nThe VuMark sample shows how to detect and track VuMarks." +
             "\n\n" +
             keyFunctionality +
@@ -162,14 +164,15 @@ public class AboutScreenInfo
             "\n• Double tap to access options menu" +
             "\n• Tap window showing VuMark ID to dismiss" +
             "\n\n" +
-            footer + "\n");
+            footer + "\n"
+            },
 
 
-        // Cylinder Targets
+            // Cylinder Targets
 
-        descriptions.Add(
-            "CylinderTargets",
-            description +
+            {
+                "CylinderTargets",
+                description +
             "\nThe Cylinder Targets sample shows how to detect a cylindrical " +
             "target and animate a 3D object around the circumference of the cylinder." +
             "\n\n" +
@@ -186,14 +189,15 @@ public class AboutScreenInfo
             "\n• Point camera at target to view" +
             "\n• Single tap to focus" +
             "\n\n" +
-            footer + "\n");
+            footer + "\n"
+            },
 
 
-        // Multi Targets
+            // Multi Targets
 
-        descriptions.Add(
-            "MultiTargets",
-            description +
+            {
+                "MultiTargets",
+                description +
             "\nThe Multi Targets sample shows how to detect a simple cuboid 3D shape " +
             "and animate a 3D object around the shape." +
             "\n\n" +
@@ -208,14 +212,15 @@ public class AboutScreenInfo
             "\n• Point camera at target to view" +
             "\n• Single tap to focus" +
             "\n\n" +
-            footer + "\n");
+            footer + "\n"
+            },
 
 
-        // User Defined Targets
+            // User Defined Targets
 
-        descriptions.Add(
-            "UserDefinedTargets",
-            description +
+            {
+                "UserDefinedTargets",
+                description +
             "\nThe User Defined Targets sample shows how to capture and create an " +
             "image target at runtime from user-selected camera video frames." +
             "\n\n" +
@@ -228,14 +233,15 @@ public class AboutScreenInfo
             "\n• Single tap to focus" +
             "\n• Double tap to access options menu" +
             "\n\n" +
-            footer + "\n");
+            footer + "\n"
+            },
 
 
-        // Object Reco
+            // Object Reco
 
-        descriptions.Add(
-            "ObjectReco",
-            description +
+            {
+                "ObjectReco",
+                description +
             "\nThe Object Recognition sample shows how to recognize and track an object." +
             "\n\n" +
             keyFunctionality +
@@ -251,14 +257,15 @@ public class AboutScreenInfo
             "\n• Single tap to focus" +
             "\n• Double tap to access the options menu" +
             "\n\n" +
-            footer + "\n");
+            footer + "\n"
+            },
 
 
-        // Cloud Reco
+            // Cloud Reco
 
-        descriptions.Add(
-            "CloudReco",
-            description +
+            {
+                "CloudReco",
+                description +
             "\nThe Cloud Reco sample shows how to use the cloud recognition service to " +
             "recognize targets located in a cloud database." +
             "\n\n" +
@@ -274,14 +281,15 @@ public class AboutScreenInfo
             "\n• Single tap to focus" +
             "\n• Double tap to access options menu" +
             "\n\n" +
-            footer + "\n");
+            footer + "\n"
+            },
 
 
-        // Virtual Buttons
+            // Virtual Buttons
 
-        descriptions.Add(
-            "VirtualButtons",
-            description +
+            {
+                "VirtualButtons",
+                description +
             "\nThe Virtual Buttons sample shows how the developer can define rectangular " +
             "regions on image targets that trigger an event when touched or occluded in " +
             "the camera view. The sample renders a 3D object that changes color when " +
@@ -297,14 +305,15 @@ public class AboutScreenInfo
             "\n• Point camera at target to view" +
             "\n• Single tap to focus" +
             "\n\n" +
-            footer + "\n");
+            footer + "\n"
+            },
 
 
-        // Model Targets
+            // Model Targets
 
-        descriptions.Add(
-            "ModelTargets",
-            description +
+            {
+                "ModelTargets",
+                description +
             "\nThe Model Targets sample shows how to detect a 3D object " +
             "and render a simple 3D representation on top of it." +
             "\n\n" +
@@ -321,14 +330,15 @@ public class AboutScreenInfo
             "\n• Point camera at target to view" +
             "\n• Single tap to focus" +
             "\n\n" +
-            footer + "\n");
+            footer + "\n"
+            },
 
 
-        // Ground Plane
+            // Ground Plane
 
-        descriptions.Add(
-            "GroundPlane",
-            description +
+            {
+                "GroundPlane",
+                description +
             "\nThe Ground Plane sample demonstrates how to place " +
             "content on surfaces and in mid-air using anchor points." +
             "\n\n" +
@@ -355,14 +365,15 @@ public class AboutScreenInfo
             "\n• Tap to place Drone in the air" +
             "\n• Tap again to move Drone to the desired position" +
             "\n\n" +
-            footer + "\n");
+            footer + "\n"
+            },
 
 
-        // Background Texture Access
+            // Background Texture Access
 
-        descriptions.Add(
-            "BackgroundTextureAccess",
-            description +
+            {
+                "BackgroundTextureAccess",
+                description +
             "\nThe Background Texture Access sample shows how to use two shaders to " +
             "manipulate the background video. One shader turns the video into inverted " +
             "black-and-white and another distorts the video where you touch on the screen." +
@@ -377,14 +388,15 @@ public class AboutScreenInfo
             "\n• Point camera at target to view" +
             "\n• Tap and drag to distort video background" +
             "\n\n" +
-            footer + "\n");
+            footer + "\n"
+            },
 
 
-        // Occlusion Management
+            // Occlusion Management
 
-        descriptions.Add(
-            "OcclusionManagement",
-            description +
+            {
+                "OcclusionManagement",
+                description +
             "\nThe Occlusion Management sample shows the use of transparent shaders to " +
             "let users partially look inside a real object with an occlusion effect." +
             "\n\n" +
@@ -398,14 +410,15 @@ public class AboutScreenInfo
             "\n• Point camera at target to view" +
             "\n• Single tap to focus" +
             "\n\n" +
-            footer + "\n");
+            footer + "\n"
+            },
 
 
-        // Books
+            // Books
 
-        descriptions.Add(
-            "Books",
-            description +
+            {
+                "Books",
+                description +
             "\nThe Books sample shows how to use the Cloud Recognition service to build a " +
             "simple UI to scan a sample target book cover and display info on that book." +
             "\n\n" +
@@ -422,14 +435,15 @@ public class AboutScreenInfo
             "\n• Point camera at sample book cover to view info" +
             "\n• Press close button to scan another book" +
             "\n\n" +
-            footer + "\n");
+            footer + "\n"
+            },
 
 
-        // ARVR
+            // ARVR
 
-        descriptions.Add(
-            "ARVR",
-            description +
+            {
+                "ARVR",
+                description +
             "\nThis sample demonstrates a mixed reality experience that starts in AR and moves to VR." +
             "\n\n" +
             keyFunctionality +
@@ -443,7 +457,9 @@ public class AboutScreenInfo
             "\n• Aim the cursor at the button (labeled “VR”) to trigger the transition to VR" +
             "\n• In VR mode, look at the button on the floor to return to AR" +
             "\n\n" +
-            footer + "\n");
+            footer + "\n"
+            }
+        };
     }
 
     #endregion // CONSTRUCTOR

@@ -9,7 +9,7 @@ using Vuforia;
 public class InitErrorHandler : MonoBehaviour
 {
     #region PRIVATE_MEMBER_VARIABLES
-    string key;
+    readonly string key;
     string errorMsg;
     const string errorTitle = "Vuforia Initialization Error";
     #endregion PRIVATE_MEMBER_VARIABLES

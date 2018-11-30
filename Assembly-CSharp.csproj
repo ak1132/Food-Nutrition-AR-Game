@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{94F8804B-6146-D181-20D4-895C6A67B556}</ProjectGuid>
+    <ProjectGuid>{6D5EB6F1-A0F4-49E5-9017-B87E1A123B48}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -82,6 +82,7 @@
     <Compile Include="Assets\SamplesResources\VuforiaSamplesUI\Scripts\SamplesMainMenu.cs" />
     <Compile Include="Assets\SamplesResources\VuforiaSamplesUI\Scripts\SamplesNavigationHandler.cs" />
     <Compile Include="Assets\Scripts\AnimationController.cs" />
+    <Compile Include="Assets\Scripts\DebugWriter.cs" />
     <Compile Include="Assets\Scripts\FrameQualityMeter.cs" />
     <Compile Include="Assets\Scripts\LoadScript.cs" />
     <Compile Include="Assets\Scripts\NNConnector.cs" />
@@ -108,16 +109,16 @@
     <None Include="Assets\Vuforia\Shaders\DepthContour.shader" />
     <None Include="Assets\Vuforia\Shaders\Text3D.shader" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>D:/unity-wkspace/FoodVolume/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>D:/unity-wkspace/Food-Volume-Estimation-Game/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/unity-wkspace/FoodVolume/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/unity-wkspace/Food-Volume-Estimation-Game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>D:/unity-wkspace/FoodVolume/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>D:/unity-wkspace/Food-Volume-Estimation-Game/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/unity-wkspace/FoodVolume/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/unity-wkspace/Food-Volume-Estimation-Game/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Program Files/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -318,19 +319,19 @@
       <HintPath>D:/Program Files/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>D:/unity-wkspace/FoodVolume/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+      <HintPath>D:/unity-wkspace/Food-Volume-Estimation-Game/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV">
-      <HintPath>D:/unity-wkspace/FoodVolume/Assets/Plugins/Emgu.CV.dll</HintPath>
+      <HintPath>D:/unity-wkspace/Food-Volume-Estimation-Game/Assets/Plugins/Emgu.CV.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.Util">
-      <HintPath>D:/unity-wkspace/FoodVolume/Assets/Plugins/Emgu.Util.dll</HintPath>
+      <HintPath>D:/unity-wkspace/Food-Volume-Estimation-Game/Assets/Plugins/Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="IsovistLibrary">
-      <HintPath>D:/unity-wkspace/FoodVolume/Assets/Plugins/IsovistLibrary.dll</HintPath>
+      <HintPath>D:/unity-wkspace/Food-Volume-Estimation-Game/Assets/Plugins/IsovistLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing">
-      <HintPath>D:/unity-wkspace/FoodVolume/Assets/Plugins/System.Drawing.dll</HintPath>
+      <HintPath>D:/unity-wkspace/Food-Volume-Estimation-Game/Assets/Plugins/System.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/Alienware/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
@@ -686,19 +687,19 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{C0A66CF3-7D6A-A9E9-3F91-8C979E23CC9A}</Project>
+      <Project>{FB91A1CA-384F-665C-1FF3-BE7EA2639178}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
     <ProjectReference Include="VuforiaScripts.csproj">
-      <Project>{1EC4A537-A5F5-02FF-60CA-53B1F1BD8144}</Project>
+      <Project>{D37EC14D-93BC-BE6A-C3F4-4024C6E567CB}</Project>
       <Name>VuforiaScripts</Name>
     </ProjectReference>
     <ProjectReference Include="VuforiaEditorScripts.csproj">
-      <Project>{B121856F-CA8D-C272-7285-9EC76D36DFAF}</Project>
+      <Project>{808EF28B-9EA5-4EA1-7BCB-FDD044FFE9ED}</Project>
       <Name>VuforiaEditorScripts</Name>
     </ProjectReference>
     <ProjectReference Include="VuforiaVersionCheckerScripts.csproj">
-      <Project>{548BA46C-227B-523E-496A-66B98DFE867F}</Project>
+      <Project>{BB0A7478-48C7-272E-171D-303AB151E9C7}</Project>
       <Name>VuforiaVersionCheckerScripts</Name>
     </ProjectReference>
   </ItemGroup>

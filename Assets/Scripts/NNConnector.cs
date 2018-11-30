@@ -7,7 +7,13 @@ using System;
 public class NNConnector : MonoBehaviour
 {
 
-    private readonly string screenshotURL = "http://d9553a25.ngrok.io/nn";
+    private readonly string screenshotURL = "http://88103ecd.ngrok.io/nn";
+    private DebugWriter debugWriter;
+
+    private void Start()
+    {
+        debugWriter = FindObjectOfType<DebugWriter>();
+    }
 
     public void SendDatatoModel()
     {
@@ -45,7 +51,10 @@ public class NNConnector : MonoBehaviour
             else
             {
                 string response = w.downloadHandler.text.Trim();
-                Debug.Log("Response:\n"+response);
+                string log = "Response from NNConnector:\n" + response;
+                debugWriter.WriteToFile(log);
+                Debug.Log(log);
+
                 NNResponse nNResponse = NNResponse.FromJson(response);
                 IList<string> foods = nNResponse.Names;
                 IList<double> areas = nNResponse.Areas;

@@ -161,7 +161,7 @@ public class UDTEventHandler : MonoBehaviour, IUserDefinedTargetEventHandler
 
             // generate a new target:
             m_TargetBuildingBehaviour.BuildNewTarget(targetName, ImageTargetTemplate.GetSize().x);
-            GetComponent<NNConnector>().SendDatatoModel();
+            FindObjectOfType<NNConnector>().SendDatatoModel();
         }
         else
         {

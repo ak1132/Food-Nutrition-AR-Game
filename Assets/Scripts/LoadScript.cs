@@ -1,16 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
-public class LoadScript : MonoBehaviour {
+public class LoadScript : MonoBehaviour
+{
 
-	void Start () {
+    void Start()
+    {
         PlayerPrefs.DeleteAll();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+        //If there is a DB load from there
+        PlayerPrefs.SetFloat("totalCalories", 0f);
+        PlayerPrefs.SetFloat("totalFat", 0f);
+        PlayerPrefs.SetFloat("totalProtein", 0f);
+        PlayerPrefs.SetFloat("totalDietaryFiber", 0f);
+    }
 }

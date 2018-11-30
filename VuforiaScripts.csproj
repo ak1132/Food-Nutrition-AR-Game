@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{1EC4A537-A5F5-02FF-60CA-53B1F1BD8144}</ProjectGuid>
+    <ProjectGuid>{D37EC14D-93BC-BE6A-C3F4-4024C6E567CB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>VuforiaScripts</AssemblyName>
@@ -300,19 +300,19 @@
       <HintPath>D:/Program Files/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>D:/unity-wkspace/FoodVolume/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+      <HintPath>D:/unity-wkspace/Food-Volume-Estimation-Game/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV">
-      <HintPath>D:/unity-wkspace/FoodVolume/Assets/Plugins/Emgu.CV.dll</HintPath>
+      <HintPath>D:/unity-wkspace/Food-Volume-Estimation-Game/Assets/Plugins/Emgu.CV.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.Util">
-      <HintPath>D:/unity-wkspace/FoodVolume/Assets/Plugins/Emgu.Util.dll</HintPath>
+      <HintPath>D:/unity-wkspace/Food-Volume-Estimation-Game/Assets/Plugins/Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="IsovistLibrary">
-      <HintPath>D:/unity-wkspace/FoodVolume/Assets/Plugins/IsovistLibrary.dll</HintPath>
+      <HintPath>D:/unity-wkspace/Food-Volume-Estimation-Game/Assets/Plugins/IsovistLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing">
-      <HintPath>D:/unity-wkspace/FoodVolume/Assets/Plugins/System.Drawing.dll</HintPath>
+      <HintPath>D:/unity-wkspace/Food-Volume-Estimation-Game/Assets/Plugins/System.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/Alienware/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>

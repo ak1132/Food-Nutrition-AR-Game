@@ -52,6 +52,10 @@ def food_recognition():
     objects = client.object_localization(
         image=image).localized_object_annotations
     d_bbox = dict()
+
+    if(len(objects) <= 0):
+        raise Exception("Google Vision bboxes not working")
+
     for i in range(len(objects)):
         x1 = objects[i].bounding_poly.normalized_vertices[0].x
         y1 = objects[i].bounding_poly.normalized_vertices[0].y
@@ -69,22 +73,16 @@ def food_recognition():
     d1[:, :, 0] = decoded[:, :, 2]
     d1[:, :, 1] = decoded[:, :, 1]
     d1[:, :, 2] = decoded[:, :, 0]
-    # decoded[:,:,0],decoded[:,:,2]=decoded[:,:,2],decoded[:,:,0]
-    # print(type(d1))
-    # print(np.shape(d1))
-    # imsave('tmp1.png',d1)
 
-    # print(s)
-    # decoded=decoded.astype(float32)
     patches = list()
     area = list()
+
     for key in d_bbox:
         x1 = round(s[1]*key[0])
         y1 = round(s[0]*key[1])
         x2 = round(s[1]*key[2])
         y2 = round(s[0]*key[3])
         p = d1[y1:y2, x1:x2, :3]
-        # p[:, :, 0], p[:, :, 2] = p[:, :, 2], p[:, :, 0]
         imsave(str(x1)+'-'+str(y1)+'.png', p)
         p = imresize(arr=p, size=(227, 227), interp='bilinear')
         p = p[:, :, :3].astype(np.float32)
@@ -112,15 +110,15 @@ def food_recognition():
         if group == 1:
             conv = convolve(input, kernel)
         else:
-            # tf.split(3, group, input)
             input_groups = tf.split(input, group, 3)
-            # tf.split(3, group, kernel)
             kernel_groups = tf.split(kernel, group, 3)
             output_groups = [convolve(i, k)
                              for i, k in zip(input_groups, kernel_groups)]
             conv = tf.concat(output_groups, 3)  # tf.concat(3, output_groups)
         return tf.reshape(tf.nn.bias_add(conv, biases), [-1]+conv.get_shape().as_list()[1:])
+
     x = tf.placeholder(tf.float32, (None,) + xdim)
+
     # conv1
     # conv(11, 11, 96, 4, 4, padding='VALID', name='conv1')
     k_h = 11
