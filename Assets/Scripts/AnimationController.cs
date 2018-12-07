@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class AnimationController : MonoBehaviour {
+public class AnimationController : MonoBehaviour
+{
+
+    public Button viewButton;
 
     private Animator animator;
 
@@ -17,7 +21,7 @@ public class AnimationController : MonoBehaviour {
     private DebugWriter debugWriter;
     private Dictionary<string, float> recommendedValues;
 
-    void Start ()
+    void Start()
     {
         animator = GetComponent<Animator>();
         debugWriter = FindObjectOfType<DebugWriter>();
@@ -32,7 +36,7 @@ public class AnimationController : MonoBehaviour {
 
     public float GetRecommendedValue(string key)
     {
-        if(!recommendedValues.ContainsKey(key))
+        if (!recommendedValues.ContainsKey(key))
         {
             throw new System.Exception("Invalid Nutrient");
         }
@@ -47,7 +51,7 @@ public class AnimationController : MonoBehaviour {
         float Protein = PlayerPrefs.GetFloat("currentProtein");
         float DietaryFiber = PlayerPrefs.GetFloat("currentDietaryFiber");
 
-        string[] foods = PlayerPrefs.GetString("Foods").Split(' ');
+        string[] foods = PlayerPrefs.GetString("currentFoods").Split(' ');
 
         string log = "";
 
@@ -89,7 +93,7 @@ public class AnimationController : MonoBehaviour {
 
         if (GetRecommendedValue("Calories") == 0)
         {
-            throw new System.Exception("chutyapa");
+            throw new System.Exception("Some error");
         }
 
         if ((Calories + playerCalories) > 0)
@@ -150,6 +154,8 @@ public class AnimationController : MonoBehaviour {
             PlayerPrefs.SetFloat("totalProtein", Protein + playerProtein);
             PlayerPrefs.SetFloat("totalFat", TotalFat + playerFat);
             PlayerPrefs.SetFloat("totalDietaryFiber", DietaryFiber + playerFiber);
+
+            viewButton.interactable = true;
         }
     }
 

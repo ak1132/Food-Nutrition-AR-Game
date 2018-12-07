@@ -83,6 +83,7 @@
     <Compile Include="Assets\SamplesResources\VuforiaSamplesUI\Scripts\SamplesNavigationHandler.cs" />
     <Compile Include="Assets\Scripts\AnimationController.cs" />
     <Compile Include="Assets\Scripts\DebugWriter.cs" />
+    <Compile Include="Assets\Scripts\DisplayInfo.cs" />
     <Compile Include="Assets\Scripts\FrameQualityMeter.cs" />
     <Compile Include="Assets\Scripts\LoadScript.cs" />
     <Compile Include="Assets\Scripts\NNConnector.cs" />

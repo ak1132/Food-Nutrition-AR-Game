@@ -7,7 +7,7 @@ using System;
 public class NNConnector : MonoBehaviour
 {
 
-    private readonly string screenshotURL = "http://88103ecd.ngrok.io/nn";
+    private readonly string screenshotURL = "http://0d6360f1.ngrok.io/nn";
     private DebugWriter debugWriter;
 
     private void Start()
@@ -23,7 +23,7 @@ public class NNConnector : MonoBehaviour
     IEnumerator Send()
     {
         string timeStamp = System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss");
-        string pathToSave = Application.productName +"_"+ timeStamp + ".png";
+        string pathToSave = Application.productName + "_" + timeStamp + ".png";
         yield return new WaitForEndOfFrame();
 
         int width = Screen.width;
@@ -41,7 +41,7 @@ public class NNConnector : MonoBehaviour
         form.AddField("frameCount", Time.frameCount.ToString());
         form.AddBinaryData("file", bytes, "screenshot.png", "image/png");
 
-        using(var w = UnityWebRequest.Post(screenshotURL, form))
+        using (var w = UnityWebRequest.Post(screenshotURL, form))
         {
             yield return w.SendWebRequest();
             if (w.isNetworkError || w.isHttpError)
@@ -62,7 +62,7 @@ public class NNConnector : MonoBehaviour
                 List<double> Weights = new List<double>();
                 string Query = "";
 
-                for(int i = 0; i < foods.Count; i++)
+                for (int i = 0; i < foods.Count; i++)
                 {
                     Weights.Add(areas[i]);
                     Query += foods[i] + " ";
