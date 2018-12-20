@@ -153,7 +153,8 @@ public class UDTEventHandler : MonoBehaviour, IUserDefinedTargetEventHandler
     public void BuildNewTarget()
     {
         if (m_FrameQuality == ImageTargetBuilder.FrameQuality.FRAME_QUALITY_MEDIUM ||
-            m_FrameQuality == ImageTargetBuilder.FrameQuality.FRAME_QUALITY_HIGH)
+            m_FrameQuality == ImageTargetBuilder.FrameQuality.FRAME_QUALITY_HIGH ||
+            m_FrameQuality == ImageTargetBuilder.FrameQuality.FRAME_QUALITY_LOW)
         {
             // create the name of the next target.
             // the TrackableName of the original, linked ImageTargetBehaviour is extended with a continuous number to ensure unique names

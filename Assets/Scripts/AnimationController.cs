@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ public class AnimationController : MonoBehaviour
 {
 
     public Button viewButton;
+    public Button resetButton;
 
     private Animator animator;
 
@@ -52,6 +54,7 @@ public class AnimationController : MonoBehaviour
         float DietaryFiber = PlayerPrefs.GetFloat("currentDietaryFiber");
 
         string[] foods = PlayerPrefs.GetString("currentFoods").Split(' ');
+        foods = foods.Distinct().ToArray();
 
         string log = "";
 
@@ -64,6 +67,7 @@ public class AnimationController : MonoBehaviour
 
         if (foods.Length > 0)
         {
+            PlayerPrefs.SetString("currentFoods", string.Join(",", foods));
             log = "Foods Detected : " + string.Join(",", foods);
             debugWriter.WriteToFile(log);
             Debug.Log(log);
@@ -89,11 +93,6 @@ public class AnimationController : MonoBehaviour
         {
             Debug.Log("Idle True");
             animator.SetTrigger(idleHash);
-        }
-
-        if (GetRecommendedValue("Calories") == 0)
-        {
-            throw new System.Exception("Some error");
         }
 
         if ((Calories + playerCalories) > 0)
@@ -137,7 +136,7 @@ public class AnimationController : MonoBehaviour
                 else
                 {
                     Debug.Log("Fiber False");
-                    transform.localScale = new Vector3(0.5f, transform.localScale.y, transform.localScale.z);
+                    transform.localScale = new Vector3(0.3f, transform.localScale.y, transform.localScale.z);
                     animator.SetTrigger(meanHash);
                 }
 
@@ -146,7 +145,7 @@ public class AnimationController : MonoBehaviour
             else
             {
                 Debug.Log("Calorie False");
-                transform.localScale = new Vector3(0.5f, transform.localScale.y, 0.5f);
+                transform.localScale = new Vector3(0.35f, transform.localScale.y, 0.3f);
                 animator.SetTrigger(cryHash);
             }
 
@@ -156,6 +155,7 @@ public class AnimationController : MonoBehaviour
             PlayerPrefs.SetFloat("totalDietaryFiber", DietaryFiber + playerFiber);
 
             viewButton.interactable = true;
+            resetButton.interactable = true;
         }
     }
 

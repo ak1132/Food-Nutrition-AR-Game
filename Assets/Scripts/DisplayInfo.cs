@@ -36,4 +36,10 @@ public class DisplayInfo : MonoBehaviour
         nutrientCanvas.SetActive(false);
         targetCanvas.SetActive(true);
     }
+
+    public void Reset()
+    {
+        StopAllCoroutines();
+        FindObjectOfType<GameController>().Init();
+    }
 }

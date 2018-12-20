@@ -18,7 +18,7 @@ public class NutritionixClient : MonoBehaviour {
     private double DietaryFiber = 0d;
     private double Sugars = 0d;
     private double Protein = 0d;
-    private double TotalWeight = 0d;
+    private double TotalWeight = 1d;
 
     private string foodQuery;
 
@@ -59,38 +59,62 @@ public class NutritionixClient : MonoBehaviour {
         byte[] formData = System.Text.Encoding.UTF8.GetBytes(JSONString);
         WWW request = new WWW(URL, formData, requestHeaders);
         foodQuery = Query;
+
         StartCoroutine(OnResponse(request, Weights));
     }
 
     private IEnumerator OnResponse (WWW request, List<double> Weights) {
+        yield return new WaitForSecondsRealtime(5f);
         yield return request;
         NutritionixResponse response = NutritionixResponse.FromJson (request.text);
+        Debug.Log("Response: \n"+request.text);
         debugWriter.WriteToFile("Response from Nutritionix : \n" + request.text);
-        Debug.Log(request.text);
 
         IList<Food> foods = response.Foods;
 
-        for(int i=0; i<foods.Count; i++){
-            Food food = foods[i];
-            double Weight = Weights[i];
+        if (foods != null)
+        {
+            for (int i = 0; i < foods.Count; i++)
+            {
+                Food food = foods[i];
+                if (Weights != null)
+                {
+                    double Weight = Weights[i];
 
-            Calories += food.NfCalories*Weight;
-            TotalFat += food.NfTotalFat * Weight;
-            Protein += food.NfProtein * Weight;
-            DietaryFiber += food.NfDietaryFiber * Weight;
-            Sugars += food.NfProtein * Weight;
+                    Calories += food.NfCalories * Weight;
+                    TotalFat += food.NfTotalFat * Weight;
+                    Protein += food.NfProtein * Weight;
+                    DietaryFiber += food.NfDietaryFiber * Weight;
+                    Sugars += food.NfProtein * Weight;
 
-            TotalWeight += Weight;
+                    TotalWeight += Weight;
+                }
+                else
+                {
+                    Calories += food.NfCalories;
+                    TotalFat += food.NfTotalFat;
+                    Protein += food.NfProtein;
+                    DietaryFiber += food.NfDietaryFiber;
+                    Sugars += food.NfProtein;
+                }
+
+            }
+
+            PlayerPrefs.SetFloat("currentCalories", (float)(Calories / TotalWeight));
+            PlayerPrefs.SetFloat("currentTotalFat", (float)(TotalFat / TotalWeight));
+            PlayerPrefs.SetFloat("currentProtein", (float)(Protein / TotalWeight));
+            PlayerPrefs.SetFloat("currentDietaryFiber", (float)(DietaryFiber / TotalWeight));
+            PlayerPrefs.SetString("currentFoods", foodQuery);
+
+            if (Weights != null)
+            {
+                FindObjectOfType<AnimationController>().UpdateCharacterAnimation();
+            }
         }
-
-        PlayerPrefs.SetFloat("currentCalories", (float)(Calories / TotalWeight));
-        PlayerPrefs.SetFloat("currentTotalFat", (float)(TotalFat / TotalWeight));
-        PlayerPrefs.SetFloat("currentProtein", (float)(Protein / TotalWeight));
-        PlayerPrefs.SetFloat("currentDietaryFiber", (float)(DietaryFiber / TotalWeight));
-        PlayerPrefs.SetString("currentFoods", foodQuery);
-
-        FindObjectOfType<AnimationController>().UpdateCharacterAnimation();
-
+        else
+        {
+            throw new Exception("NULL RESPONSE\n");
+        }
     }
 
 }
