@@ -113,7 +113,7 @@ virtualenv==16.0.0
 vyper==0.1.0b3
 wcwidth==0.1.7
 webencodings==0.5.1
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 widgetsnbextension==3.4.2
 wrapt==1.10.11
 xlrd==1.1.0
