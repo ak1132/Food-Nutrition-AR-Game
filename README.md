@@ -4,7 +4,7 @@ An augmented reality nutrition application using Vuforia Engine and Unity Game E
 
 Backend also written using Tensorflow in Python and interfaced via Flask micro-framework for REST based calls.
 
-[![Game Demo Video](https://img.youtube.com/vi/koh-YtudNyA/hqdefault.jpg)](https://www.youtube.com/watch?v=koh-YtudNyA "Object Recognition and Character Animation/Scaling using Unity and Vuforia Engine")
+[![Game Demo Video](https://img.youtube.com/vi/koh-YtudNyA/hqdefault.jpg)](https://youtu.be/PhXw5Hgrijg "Object Recognition and Character Animation/Scaling using Unity and Vuforia Engine")
 
 ## Components include
 
