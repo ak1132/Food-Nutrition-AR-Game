@@ -4,7 +4,7 @@ astor==0.7.1
 astroid==2.0.4
 autopep8==1.4.1
 backcall==0.1.0
-bleach==3.0.1
+bleach==3.1.4
 -e git+https://github.com/SohierDane/BigQuery_Helper@8615a7f6c1663e7f2d48aa2b32c2dbcb600a440f#egg=bq_helper
 cachetools==3.0.0
 certifi==2018.10.15
